@@ -9,11 +9,15 @@ import com.bumptech.glide.Glide
 import com.example.presentation.R
 import com.example.presentation.constants.Constants
 import com.example.presentation.models.MoviePresentationModel
-import io.reactivex.disposables.CompositeDisposable
+import com.jakewharton.rxbinding3.view.clicks
+import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.PublishSubject
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
-    private val dissolve = CompositeDisposable()
+    val navigateToDetails: PublishSubject<MoviePresentationModel> = PublishSubject.create()
     private var movies = emptyList<MoviePresentationModel>()
+    lateinit var subscribeClick: Disposable
+
 
     class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -34,18 +38,15 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             .load(Constants.IMAGE_URL + movie.posterPath)
             .override(500, 500)
             .into(holder.itemView.findViewById(R.id.posterIV))
-
         holder.itemView.findViewById<TextView>(R.id.titleTV).text = movie.originalTitle
+        subscribeClick = (holder.itemView.clicks().subscribe {
+            navigateToDetails.onNext(movie)
+        })
     }
 
     fun setData(list: List<MoviePresentationModel>) {
         movies = list
         notifyDataSetChanged()
-    }
-
-    override fun onViewDetachedFromWindow(holder: MovieViewHolder) {
-        super.onViewDetachedFromWindow(holder)
-        dissolve.addAll()
     }
 }
 

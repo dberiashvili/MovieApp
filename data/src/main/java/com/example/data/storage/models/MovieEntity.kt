@@ -1,13 +1,15 @@
-package com.example.presentation.models
+package com.example.data.storage.models
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Parcelize
-data class MoviePresentationModel(
+@Entity(tableName = "favourite_movies")
+data class MovieEntity(
+    @PrimaryKey
+    val id: Int,
     val adult: Boolean,
     val backdropPath: String?,
-    val id: Int,
+    val movieID: Int,
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
@@ -15,8 +17,7 @@ data class MoviePresentationModel(
     val posterPath: String,
     val releaseDate: String,
     val title: String,
-    val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int,
     var isSelected: Boolean
-) : Parcelable
+)

@@ -6,6 +6,11 @@
     tools:context=".screens.HomeScreen"
     android:id="@+id/homeScreen">
 
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progress_circular" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movieRV"

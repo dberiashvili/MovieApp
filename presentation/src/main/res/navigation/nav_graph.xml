@@ -18,13 +18,16 @@
         android:id="@+id/detailsScreen"
         android:name="com.example.presentation.screens.DetailsScreen"
         android:label="fragment_details_screen"
-        tools:layout="@layout/fragment_details_screen" >
+        tools:layout="@layout/fragment_details_screen">
         <action
             android:id="@+id/action_detailsScreen_to_homeScreen"
             app:destination="@id/homeScreen" />
         <action
             android:id="@+id/action_detailsScreen_to_favoritesScreen"
             app:destination="@id/favoritesScreen" />
+        <argument
+            android:name="movie"
+            app:argType="com.example.presentation.models.MoviePresentationModel" />
     </fragment>
     <fragment
         android:id="@+id/favoritesScreen"

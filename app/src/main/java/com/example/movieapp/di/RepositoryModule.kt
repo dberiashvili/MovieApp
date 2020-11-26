@@ -2,6 +2,7 @@ package com.example.movieapp.di
 
 import com.example.data.network.service.MovieService
 import com.example.data.repository.RepositoryImpl
+import com.example.data.storage.MovieDB
 import com.example.domain.repository.Repository
 import dagger.Module
 import dagger.Provides
@@ -12,5 +13,6 @@ import dagger.hilt.android.components.ApplicationComponent
 @InstallIn(ApplicationComponent::class)
 object RepositoryModule {
     @Provides
-    fun provideRepository(service: MovieService):Repository = RepositoryImpl(service)
+    fun provideRepository(service: MovieService, database: MovieDB): Repository =
+        RepositoryImpl(service, database)
 }
