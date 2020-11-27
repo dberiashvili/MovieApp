@@ -31,4 +31,12 @@ class RepositoryImpl @Inject constructor(
         return database.movieDao().deleteFromFavorites(movie.toEntity())
     }
 
+    override fun getSavedMovies(): Observable<List<MovieDomainModel>> {
+        return database.movieDao().getSavedMovies().map {
+            it.map {
+                it.toDomainModel()
+            }
+        }
+    }
+
 }

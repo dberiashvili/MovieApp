@@ -15,7 +15,6 @@ data class MoviePresentationModel(
     val posterPath: String,
     val releaseDate: String,
     val title: String,
-    val video: Boolean,
     val voteAverage: Double,
     val voteCount: Int,
     var isSelected: Boolean

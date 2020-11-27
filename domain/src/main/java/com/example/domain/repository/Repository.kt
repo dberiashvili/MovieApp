@@ -8,4 +8,5 @@ interface Repository {
     fun fetchMoviesFromServer(page: Int): Observable<List<MovieDomainModel>>
     fun saveMovieToDatabase(movie: MovieDomainModel): Completable
     fun removeMovieFromDatabase(movie: MovieDomainModel): Completable
+    fun getSavedMovies():Observable<List<MovieDomainModel>>
 }

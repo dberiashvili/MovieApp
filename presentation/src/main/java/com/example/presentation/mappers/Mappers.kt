@@ -14,10 +14,9 @@ fun MovieDomainModel.toPresentationModel() = MoviePresentationModel(
     posterPath = posterPath,
     releaseDate = releaseDate,
     title = title,
-    video = video,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    isSelected = false
+    isSelected = isSelected
 )
 
 fun MoviePresentationModel.toDomainModel() = MovieDomainModel(
@@ -31,7 +30,6 @@ fun MoviePresentationModel.toDomainModel() = MovieDomainModel(
     posterPath = posterPath,
     releaseDate = releaseDate,
     title = title,
-    video = video,
     voteAverage = voteAverage,
     voteCount = voteCount,
     isSelected = isSelected

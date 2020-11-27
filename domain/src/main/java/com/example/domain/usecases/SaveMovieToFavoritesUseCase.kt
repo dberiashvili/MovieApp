@@ -5,9 +5,5 @@ import com.example.domain.repository.Repository
 import javax.inject.Inject
 
 class SaveMovieToFavoritesUseCase @Inject constructor(private val repository: Repository) {
-    fun saveMovie(movie: MovieDomainModel) {
-        if (movie.isSelected) {
-            repository.saveMovieToDatabase(movie)
-        }
-    }
+    fun saveMovie(movie: MovieDomainModel) = repository.saveMovieToDatabase(movie)
 }
