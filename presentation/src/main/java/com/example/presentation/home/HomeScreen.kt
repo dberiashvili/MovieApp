@@ -1,4 +1,4 @@
-package com.example.presentation.screens
+package com.example.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,14 +15,13 @@ import com.example.presentation.R
 import com.example.presentation.extentions.hide
 import com.example.presentation.lists.MovieAdapter
 import com.example.presentation.mappers.toPresentationModel
-import com.example.presentation.vm.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
 
 @AndroidEntryPoint
 class HomeScreen : Fragment() {
     private lateinit var adapter: MovieAdapter
-    private val viewModel: MovieViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
@@ -35,7 +34,7 @@ class HomeScreen : Fragment() {
         val progressBar = view.findViewById<ProgressBar>(R.id.progress_circular)
         moviesRV.layoutManager = LinearLayoutManager(context)
         moviesRV.adapter = adapter
-        compositeDisposable.add(viewModel.fetchMoviesFromServer(20)
+        compositeDisposable.add(viewModel.fetchMoviesFromServer(1)
             .doOnNext {
                 progressBar.hide()
             }

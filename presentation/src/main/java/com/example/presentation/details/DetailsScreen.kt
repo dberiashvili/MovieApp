@@ -1,4 +1,4 @@
-package com.example.presentation.screens
+package com.example.presentation.details
 
 import android.os.Bundle
 import android.view.View
@@ -10,7 +10,6 @@ import com.example.presentation.R
 import com.example.presentation.constants.Constants
 import com.example.presentation.databinding.FragmentDetailsScreenBinding
 import com.example.presentation.mappers.toDomainModel
-import com.example.presentation.vm.DetailsViewModel
 import com.jakewharton.rxbinding3.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable

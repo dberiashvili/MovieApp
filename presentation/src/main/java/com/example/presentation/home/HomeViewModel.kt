@@ -1,4 +1,4 @@
-package com.example.presentation.vm
+package com.example.presentation.home
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MovieViewModel @ViewModelInject constructor(
+class HomeViewModel @ViewModelInject constructor(
     private val fetchMoviesFromServerUseCase: FetchResponseFromServerUseCase
 ) :
     ViewModel() {

@@ -1,4 +1,4 @@
-package com.example.presentation.screens
+package com.example.presentation.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
