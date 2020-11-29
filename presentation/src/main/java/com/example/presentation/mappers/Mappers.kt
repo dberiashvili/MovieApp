@@ -32,5 +32,5 @@ fun MoviePresentationModel.toDomainModel() = MovieDomainModel(
     title = title,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    isSelected = isSelected
+    isSelected  = true
 )

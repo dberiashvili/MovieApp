@@ -22,17 +22,17 @@ fun MovieDTO.toDomainModel() = MovieDomainModel(
 
 fun MovieDomainModel.toEntity() = MovieEntity(
 
-    id = 0,
+
     adult = adult,
     backdropPath = backdropPath,
-    movieID = id,
+    id = id,
     originalLanguage = originalLanguage,
     originalTitle = originalTitle,
     overview = overview,
     popularity = popularity,
     releaseDate = releaseDate,
     title = title,
-    isSelected = true,
+    isSelected = isSelected,
     posterPath = posterPath,
     voteAverage = voteAverage,
     voteCount = voteCount
@@ -47,9 +47,9 @@ fun MovieEntity.toDomainModel() = MovieDomainModel(
     popularity = popularity,
     releaseDate = releaseDate,
     title = title,
-    isSelected = true,
+    isSelected = isSelected,
     posterPath = posterPath,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    id = movieID
+    id = id
 )

@@ -13,5 +13,5 @@ data class MovieDomainModel(
     val title: String,
     val voteAverage: Double,
     val voteCount: Int,
-    var isSelected: Boolean = true
+    var isSelected: Boolean
 )
