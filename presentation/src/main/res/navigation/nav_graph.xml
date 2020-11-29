@@ -37,5 +37,11 @@
         <action
             android:id="@+id/action_favoritesScreen_to_homeScreen"
             app:destination="@id/homeScreen" />
+        <action
+            android:id="@+id/action_favoritesScreen_to_detailsScreen"
+            app:destination="@id/detailsScreen" />
+        <argument
+            android:name="movie"
+            app:argType="com.example.presentation.models.MoviePresentationModel" />
     </fragment>
 </navigation>
