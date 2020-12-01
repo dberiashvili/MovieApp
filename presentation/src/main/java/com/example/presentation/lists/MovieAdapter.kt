@@ -38,7 +38,6 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             .load(Constants.IMAGE_URL + movie.posterPath)
             .override(500, 500)
             .into(holder.itemView.findViewById(R.id.posterIV))
-        holder.itemView.findViewById<TextView>(R.id.titleTV).text = movie.originalTitle
         subscribeClick = (holder.itemView.clicks().subscribe {
             navigateToDetails.onNext(movie)
         })

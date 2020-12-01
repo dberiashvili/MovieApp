@@ -1,7 +1,6 @@
 package com.example.presentation.details
 
 import android.os.Bundle
-import android.util.Log.d
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,7 +12,6 @@ import com.example.presentation.databinding.FragmentDetailsScreenBinding
 import com.example.presentation.mappers.toDomainModel
 import com.jakewharton.rxbinding3.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 @AndroidEntryPoint
