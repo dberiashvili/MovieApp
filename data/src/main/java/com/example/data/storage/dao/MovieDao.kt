@@ -15,4 +15,7 @@ interface MovieDao {
 
     @Delete
     fun deleteFromFavorites(movie: MovieEntity): Completable
+
+    @Query("SELECT * FROM favourite_movies WHERE id = :id LIMIT 1")
+    fun isFavorite(id: Int): Observable<MovieEntity>
 }

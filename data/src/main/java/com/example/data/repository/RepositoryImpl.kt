@@ -38,4 +38,10 @@ class RepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override fun isFavorite(id: Int): Observable<MovieDomainModel> {
+        return database.movieDao().isFavorite(id).map {
+            it.toDomainModel()
+        }
+    }
 }
