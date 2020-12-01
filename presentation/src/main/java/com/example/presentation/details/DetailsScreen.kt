@@ -56,9 +56,9 @@ class DetailsScreen : Fragment(R.layout.fragment_details_screen) {
             viewModel.checkFavorite(args.movie.id).subscribe {
                 it.toPresentationModel()
                 if (it.isSelected) {
-                    d("selectedValue", "true")
+                    favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24)
                 } else {
-                    d("selectedValue", "false")
+                    favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 }
             }
         )
