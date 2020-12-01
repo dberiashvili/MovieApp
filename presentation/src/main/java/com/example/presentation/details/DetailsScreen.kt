@@ -1,6 +1,7 @@
 package com.example.presentation.details
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import com.example.presentation.R
 import com.example.presentation.constants.Constants
 import com.example.presentation.databinding.FragmentDetailsScreenBinding
 import com.example.presentation.mappers.toDomainModel
+import com.example.presentation.mappers.toPresentationModel
 import com.jakewharton.rxbinding3.view.clicks
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.disposables.CompositeDisposable
@@ -38,18 +40,28 @@ class DetailsScreen : Fragment(R.layout.fragment_details_screen) {
 
 
         disposable.add(favoriteButton.clicks().subscribe {
-            if (!args.movie.isSelected){
+            if (!args.movie.isSelected) {
                 favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24)
                 viewModel.addToFavorites(args.movie.toDomainModel()).subscribe()
                 args.movie.isSelected = true
-            }
-            else{
+            } else {
                 favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 viewModel.deleteFromFavorites(args.movie.toDomainModel()).subscribe()
                 args.movie.isSelected = false
 
             }
         })
+
+        disposable.add(
+            viewModel.checkFavorite(args.movie.id).subscribe {
+                it.toPresentationModel()
+                if (it.isSelected) {
+                    d("selectedValue", "true")
+                } else {
+                    d("selectedValue", "false")
+                }
+            }
+        )
     }
 
     override fun onDestroy() {
