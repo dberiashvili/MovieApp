@@ -1,10 +1,12 @@
 package com.example.presentation.home
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -17,7 +19,10 @@ import com.example.presentation.extentions.show
 import com.example.presentation.lists.MovieAdapter
 import com.example.presentation.mappers.toPresentationModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
 import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class HomeScreen : Fragment() {
@@ -25,6 +30,7 @@ class HomeScreen : Fragment() {
     private lateinit var adapter: MovieAdapter
     private val viewModel: HomeViewModel by viewModels()
     private val compositeDisposable = CompositeDisposable()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +40,7 @@ class HomeScreen : Fragment() {
         adapter = MovieAdapter()
         val moviesRV = view.findViewById<RecyclerView>(R.id.movieRV)
         val progressBar = view.findViewById<ProgressBar>(R.id.progress_circular)
+        val searchView = view.findViewById<SearchView>(R.id.searchET)
         moviesRV.layoutManager = LinearLayoutManager(context)
         moviesRV.adapter = adapter
         compositeDisposable.add(viewModel.fetchMoviesFromServer(page)
@@ -83,20 +90,45 @@ class HomeScreen : Fragment() {
                                         it.toPresentationModel()
                                     })
                                 }, {
-                                    context?.let { context ->
-                                        MaterialDialog(context)
-                                            .show {
-                                                title(R.string.error_title)
-                                                message(R.string.error_message)
-                                                positiveButton(R.string.ok_button)
-                                            }
-                                    }
+                                    d("issuedb", it.message.toString())
                                 })
                         )
                     }
                 }
             }
         })
+        compositeDisposable.add(
+            Observable.create(ObservableOnSubscribe<String> {
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        it.onNext(newText!!)
+                        return true
+                    }
+
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return true
+                    }
+                })
+            }).map {
+                it.toLowerCase().trim()
+            }
+                .debounce(250, TimeUnit.MILLISECONDS)
+                .distinct()
+                .filter { text -> text.isNotBlank() }
+                .subscribe {
+                    viewModel.searchMovie(it).subscribe({
+                        adapter.setData(it.map {
+                            it.toPresentationModel()
+                        })
+                    },
+                        {
+                            d("error", it.message.toString())
+                        })
+                })
+
+
+
+
 
         return view
     }

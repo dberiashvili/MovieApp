@@ -7,6 +7,7 @@
     tools:context=".details.DetailsScreen">
 
 
+
     <TextView
         android:id="@+id/titleTV"
         android:layout_width="wrap_content"
@@ -24,6 +25,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTV" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/overviewET"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/posterIV"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/overviewTV"
@@ -52,5 +62,19 @@
         android:src="@drawable/ic_baseline_favorite_border_24"
         app:layout_constraintEnd_toEndOf="@id/posterIV"
         app:layout_constraintTop_toTopOf="@id/posterIV" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editIV"
+        app:layout_constraintEnd_toStartOf="@id/favoriteButton"
+        app:layout_constraintTop_toTopOf="@id/favoriteButton"
+        android:src="@drawable/ic_baseline_edit_24"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/doneIV"
+        app:layout_constraintEnd_toStartOf="@id/editIV"
+        app:layout_constraintTop_toTopOf="@id/editIV"
+        android:src="@drawable/ic_baseline_done_24"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

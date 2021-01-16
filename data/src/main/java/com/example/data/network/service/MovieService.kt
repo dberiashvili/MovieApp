@@ -8,9 +8,16 @@ import retrofit2.http.Query
 
 interface MovieService {
 
-    @GET("popular")
+    @GET("movie/popular")
     fun getMovies(
         @Query("api_key") apiKey: String,
         @Query("page") page: Int
     ): Observable<ResponseDTO>
+
+    @GET("search/movie")
+    fun searchMovie(
+        @Query("api_key") apiKey: String,
+        @Query("query") query:String
+    ):Observable<ResponseDTO>
+
 }

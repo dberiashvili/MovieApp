@@ -27,6 +27,12 @@ class RepositoryImpl @Inject constructor(
         return database.movieDao().addToFavourites(movie.toEntity())
     }
 
+    override fun saveMoviesToDatabase(movies: List<MovieDomainModel>): Completable {
+        return database.movieDao().storeMoviesToDatabase(movies.map {
+            it.toEntity()
+        })
+    }
+
     override fun removeMovieFromDatabase(movie: MovieDomainModel): Completable {
         return database.movieDao().deleteFromFavorites(movie.toEntity())
     }
@@ -43,5 +49,17 @@ class RepositoryImpl @Inject constructor(
         return database.movieDao().isFavorite(id).map {
             it.toDomainModel()
         }
+    }
+
+    override fun searchMovie(query: String): Observable<List<MovieDomainModel>> {
+        return service.searchMovie(Constants.KEY, query).map{
+            it.results.map {
+                it.toDomainModel()
+            }
+        }
+    }
+
+    override fun updateMovie(movie: MovieDomainModel): Completable {
+        return database.movieDao().updateMovie(movie.toEntity())
     }
 }

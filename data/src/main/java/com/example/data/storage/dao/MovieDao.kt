@@ -13,8 +13,14 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addToFavourites(movie: MovieEntity): Completable
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun storeMoviesToDatabase(movies: List<MovieEntity>): Completable
+
     @Delete
     fun deleteFromFavorites(movie: MovieEntity): Completable
+
+    @Update
+    fun updateMovie(movie: MovieEntity): Completable
 
     @Query("SELECT * FROM favourite_movies WHERE id = :id LIMIT 1")
     fun isFavorite(id: Int): Observable<MovieEntity>

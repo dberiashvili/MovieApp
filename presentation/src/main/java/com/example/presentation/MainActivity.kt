@@ -2,6 +2,8 @@ package com.example.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.util.Log.d
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -15,6 +17,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val navController = findNavController(R.id.fragment)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            Log.d("currentFragment", destination.toString())
+        }
         val menu = findViewById<BottomNavigationView>(R.id.bottom_nav)
         menu.setupWithNavController(navController)
 

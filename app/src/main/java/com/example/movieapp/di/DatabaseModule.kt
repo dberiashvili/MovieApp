@@ -5,10 +5,7 @@ import androidx.room.Room
 import com.example.data.storage.MovieDB
 import com.example.data.storage.dao.MovieDao
 import com.example.domain.repository.Repository
-import com.example.domain.usecases.CheckFavoriteUseCase
-import com.example.domain.usecases.GetMoviesFromDatabaseUseCase
-import com.example.domain.usecases.RemoveMovieFromFavoritesUseCase
-import com.example.domain.usecases.SaveMovieToFavoritesUseCase
+import com.example.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,6 +35,10 @@ object DatabaseModule {
         SaveMovieToFavoritesUseCase(repository)
 
     @Provides
+    fun provideSaveMoviesToDatabaseUseCase(repository: Repository): SaveMoviesToDatabaseUseCase =
+        SaveMoviesToDatabaseUseCase(repository)
+
+    @Provides
     fun provideRemoveMovieFromFavoritesUseCase(repository: Repository): RemoveMovieFromFavoritesUseCase =
         RemoveMovieFromFavoritesUseCase(repository)
 
@@ -48,4 +49,7 @@ object DatabaseModule {
     @Provides
     fun provideIsFavoriteUseCase(repository: Repository): CheckFavoriteUseCase =
         CheckFavoriteUseCase(repository)
+
+    @Provides
+    fun provideUpdateMovieUseCase(repository: Repository) = UpdateMovieUseCase(repository)
 }

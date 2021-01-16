@@ -1,8 +1,8 @@
 package com.example.presentation.details
 
 import android.os.Bundle
-import android.util.Log.d
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -10,6 +10,8 @@ import com.bumptech.glide.Glide
 import com.example.presentation.R
 import com.example.presentation.constants.Constants
 import com.example.presentation.databinding.FragmentDetailsScreenBinding
+import com.example.presentation.extentions.hide
+import com.example.presentation.extentions.show
 import com.example.presentation.mappers.toDomainModel
 import com.example.presentation.mappers.toPresentationModel
 import com.jakewharton.rxbinding3.view.clicks
@@ -55,13 +57,30 @@ class DetailsScreen : Fragment(R.layout.fragment_details_screen) {
         disposable.add(
             viewModel.checkFavorite(args.movie.id).subscribe {
                 it.toPresentationModel()
-                if (it.isSelected) {
+                if (it.id !== null) {
                     favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24)
                 } else {
                     favoriteButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
                 }
             }
         )
+
+        disposable.add(editIV.clicks().subscribe {
+            overviewET.show()
+            overviewTV.hide()
+            overviewET.hint = overviewTV.text
+        })
+
+        disposable.add(doneIV.clicks().subscribe {
+            viewModel.updateMovie(
+                args.movie.copy(
+                overview = overviewET.text.toString()
+            ).toDomainModel()
+            )
+            overviewET.hide()
+            overviewTV.show()
+        })
+
     }
 
     override fun onDestroy() {
